@@ -10,16 +10,20 @@
     border-style: solid;
     background-color: deepskyblue;
 }
-
-div {
+*
+{
     /* border-style:dashed;
             border-width:5px;
             border-color:deepskyblue;*/
 }
 
-span {
+span
+{
+
 }
 
-#div1 {
+div1 
+{
     background-color: deepskyblue;
 }
+
