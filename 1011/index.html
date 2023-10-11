@@ -2,33 +2,104 @@
 
 <head>
     <title>MIS 3033 October 11 Andrew Schmidt</title>
+    <style>
+        #maindiv {
+            background-color: aliceblue;
+            width: 800px;
+            height: 500px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: flex-end;
+            margin-top:50px;
+        }
+
+        .d1 {
+            width: 100px;
+            height: 120px;
+            margin-left: 10px;
+            margin-top: 10px;
+            background-color: lightseagreen;
+        }
+
+        #webdiv {
+            background-color: beige;
+            width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #footerdiv
+        {
+            background-color:aliceblue;
+                height:50px;
+
+
+                display:flex;
+                flex-direction:row;
+                justify-content:center;
+                align-items:center;
+                border-radius:5px;
+                color:darkgray;
+
+
+        }
+        #bodydiv
+        {
+           background-color:peru;
+           display:flex;
+           flex-direction:row;
+
+        }
+        #leftdiv
+        {
+            background-color:gray;
+        }
+        #rightdiv
+        {
+            background-color:salmon;
+
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+
+            border-radius:20px;
+            border-width:2px;
+            border-style:solid;
+            border-color:darkgray;
+            
+        }
+    </style>
+
 </head>
 
-<style>
-    #maindiv
-    {
-        background-color:aliceblue;
-        width:800px;
-        height:500px;
-        display:flex;
-        flex-direction:row;
-
-    }
-
-    .d1
-    {
-        width:100px;
-        height:120px;
-        margin-left:10px;
-        margin-top:10px;
-        background-color:lightseagreen;
-
-
-    }
-</style>
 
 
 <body>
+
+    <div id="webdiv">
+        web page
+
+        <div id="bodydiv">
+            body
+            <div id="leftdiv">
+              left
+            </div>
+            <div id="rightdiv">
+                <div style="color:dodgerblue; font-size:20px; font-weight:bold;">I Love MIS 3033</div>
+                <div>
+                    <img style="width:400px;" src="b.svg"/>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="footerdiv">
+            <span>
+                Designed and Developed by Andrew Schmidt for MIS 3033 Exam 2
+            </span>
+             </div>
+        </div">
+
     <div id="maindiv">
         <div class="d1">div1</div>
         <div class="d1">div2</div>
@@ -37,4 +108,6 @@
 
 
 </body>
+
+
 </html>
