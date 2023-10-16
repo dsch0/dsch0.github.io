@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title> MIS 3033 October 16, JavaScript</title>
+
+    <style>
+        #main
+        {
+            width:600px;
+            background-color:lightblue;
+
+        }
+
+        .divstyle
+        {
+            width:60px;
+            height:80px;
+            background-color:lightgreen;
+            border-style:solid;
+            border-width:1px;
+            border-color:black;
+            border-radius:10px;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="div1" class="divstyle"> </div>
+
+        <script>
+            "use strict";
+            document.querySelector("#div1").style.backgroundColor = "red";
+            document.querySelector("#div1").style.backgroundColor = "blue";
+        </script>
+        <div id="div2" class="divstyle"></div>
+        <div id="div3" class="divstyle"> </div>
+</body>
+</html>
