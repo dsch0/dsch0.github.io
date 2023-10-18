@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title> MIS 3033 October 18 Javascript 2</title>
+
+    <style>
+        #main
+        {
+            background-color:lightblue;
+            width:600px;
+            display:flex;
+            flex-direction:row;
+        }
+        .divstyle
+        {
+            width:300px;
+            height:400px;
+            background-color:lightgoldenrodyellow;
+            border-style:solid;
+
+        }
+        .divstyle2
+        {
+            background-color:aqua;
+            border-style:dashed;
+            height:200px;   
+        }
+    </style>
+
+</head>
+<body>
+    <div id="main">
+        <div id="left" class="divstyle"> </div>
+        <div id="right"class=divstyle> </div>
+        <div id="up" class="divstyle2"> up </div>
+        <div id="down" class="divstyle2"> Down</div>
+        <script>
+            {
+                "use strict";
+                document.querySelector("#down").innerHTML = "DOWN";
+            }
+        </script>
+    </div>
+</body>
+
+</html>
