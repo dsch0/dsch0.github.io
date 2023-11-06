@@ -1,0 +1,7 @@
+C:\Users\drew_\Desktop\MIS3033\htmlcss\dsch0.github.io\MIS3033_LC_1106_AndrewSchmidt\obj\Release\net6.0\PubTmp\Out\MIS3033_LC_1106_AndrewSchmidt.exe
+C:\Users\drew_\Desktop\MIS3033\htmlcss\dsch0.github.io\MIS3033_LC_1106_AndrewSchmidt\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\Users\drew_\Desktop\MIS3033\htmlcss\dsch0.github.io\MIS3033_LC_1106_AndrewSchmidt\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Users\drew_\Desktop\MIS3033\htmlcss\dsch0.github.io\MIS3033_LC_1106_AndrewSchmidt\obj\Release\net6.0\PubTmp\Out\MIS3033_LC_1106_AndrewSchmidt.dll
+C:\Users\drew_\Desktop\MIS3033\htmlcss\dsch0.github.io\MIS3033_LC_1106_AndrewSchmidt\obj\Release\net6.0\PubTmp\Out\MIS3033_LC_1106_AndrewSchmidt.deps.json
+C:\Users\drew_\Desktop\MIS3033\htmlcss\dsch0.github.io\MIS3033_LC_1106_AndrewSchmidt\obj\Release\net6.0\PubTmp\Out\MIS3033_LC_1106_AndrewSchmidt.runtimeconfig.json
+C:\Users\drew_\Desktop\MIS3033\htmlcss\dsch0.github.io\MIS3033_LC_1106_AndrewSchmidt\obj\Release\net6.0\PubTmp\Out\MIS3033_LC_1106_AndrewSchmidt.pdb
