@@ -8,7 +8,7 @@ namespace MIS3033_LC_1106_AndrewSchmidt.Controllers
         {
             return 20;
         }
-        public IActionResult Index()
+        public IActionResult Index() //action 
         {
             return View();
         }

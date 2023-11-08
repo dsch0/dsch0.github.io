@@ -16,10 +16,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\drew_\Desktop\MIS3033\htmlcss\dsch0.github.io\MIS3033_LC_1106_AndrewSchmidt
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/drew_/Desktop/MIS3033/htmlcss/dsch0.github.io/MIS3033_LC_1106_AndrewSchmidt/Views/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5kZXguY3NodG1s
+[C:/Users/drew_/Desktop/MIS3033/htmlcss/dsch0.github.io/MIS3033_LC_1106_AndrewSchmidt/Views/A/B.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVxCLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/drew_/Desktop/MIS3033/htmlcss/dsch0.github.io/MIS3033_LC_1106_AndrewSchmidt/Views/Second.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vjb25kLmNzaHRtbA==
+[C:/Users/drew_/Desktop/MIS3033/htmlcss/dsch0.github.io/MIS3033_LC_1106_AndrewSchmidt/Views/A/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/drew_/Desktop/MIS3033/htmlcss/dsch0.github.io/MIS3033_LC_1106_AndrewSchmidt/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/drew_/Desktop/MIS3033/htmlcss/dsch0.github.io/MIS3033_LC_1106_AndrewSchmidt/Views/Home/Second.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWNvbmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
