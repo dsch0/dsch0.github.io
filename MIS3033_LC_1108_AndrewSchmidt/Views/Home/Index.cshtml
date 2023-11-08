@@ -1,14 +1,4 @@
-﻿
-
-
-
-
-
-
-
-
-
-<html>
+﻿<html>
 
     <head>
         <title> Andrew Schmidt MIS3033</title>
@@ -44,7 +34,59 @@
     <script>
         "use strict";
         var rootPath = '@Url.Content("~/")';//get the root path of the web app
+
+
+        {
+            let stu; //null, let defines a local variable, like char, boolean
+            stu = {
+            id:"s123",
+            name:"Andrew Schmidt",
+            grade:96.6, // the last comma is optional, good practice incase we need to add another line
+            };
+            // if we try to use stu outside of the {}, it will not work since it is a local variable
+        }
+
+
     </script>
+
+    <div class="m-bd-callout m-bd-callout-primary" style="width:400px">
+        
+        <input id="id"/>
+       <button id="addbtn" class="btn btn-primary">Add</button>
+    </div>
+        <script>
+        {
+             let addbtn = document.querySelector("#addbtn");
+             addbtn.addEventListener("click", async ()=> {
+                 addstu();
+             } );
+
+             async function addstu ()
+             {// function body
+                 //fetch function here, must be async define
+
+                 let fd = new FormData();
+                // fd.append("id","S0000");
+                 fd.append("id",document.querySelector("#id").value);
+                 fd.append("dob","6/29/1990");
+                 fd.append("name","Andrew Schmidt");
+                 
+               let r= await fetch(rootPath+"Home/AddStu", {body:fd, method:"post",cache:"no-store"});
+
+                 let rj = await r.json();
+
+                 console.log(rj);
+                 ShowTable();
+
+                 Swal.fire( {
+                     title: "Success",
+                     text:"Student added successfully!",
+                     icon:"success", // , optional
+
+                 });
+             }
+        }
+        </script>
     If no name in the title 10% will deducted
 
     <div id="table">
@@ -61,7 +103,7 @@
                 if (grid != null) {
                     grid.destroy();
                 }
-                let table = document.querySelector("#table");
+                let table = document.querySelector("#table"); // this is  where to add
 
                 // add something here
                 table.innerHTML = ""; //clean everything inside the table div
