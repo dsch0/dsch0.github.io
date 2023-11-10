@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\drew_\\Desktop\\MIS3033\\htmlcss\\dsch0.github.io\\MIS3033_LC_1106_AndrewSchmidt\\wwwroot\\img\\cs.svg",
+      "PackagePath": "staticwebassets\\img\\cs.svg"
+    },
+    {
       "Id": "C:\\Users\\drew_\\Desktop\\MIS3033\\htmlcss\\dsch0.github.io\\MIS3033_LC_1106_AndrewSchmidt\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bFFNNBqGOBNQQ8bRTx2l5iQZ24E3zK05Kh3uAp78fiE=",
+  "Hash": "JtusRtUzPPlUabVTmi++5uW4qhMaT+lgrIDGGwyJRjo=",
   "Source": "MIS3033_LC_1106_AndrewSchmidt",
   "BasePath": "_content/MIS3033_LC_1106_AndrewSchmidt",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\drew_\\Desktop\\MIS3033\\htmlcss\\dsch0.github.io\\MIS3033_LC_1106_AndrewSchmidt\\wwwroot\\img\\cs.svg",
+      "SourceId": "MIS3033_LC_1106_AndrewSchmidt",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\drew_\\Desktop\\MIS3033\\htmlcss\\dsch0.github.io\\MIS3033_LC_1106_AndrewSchmidt\\wwwroot\\",
+      "BasePath": "_content/MIS3033_LC_1106_AndrewSchmidt",
+      "RelativePath": "img/cs.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\cs.svg"
     },
     {
       "Identity": "C:\\Users\\drew_\\Desktop\\MIS3033\\htmlcss\\dsch0.github.io\\MIS3033_LC_1106_AndrewSchmidt\\wwwroot\\js\\site.js",
