@@ -1,0 +1,271 @@
+﻿<html>
+<head>
+    <title>
+        Andrew Schmidt MIS3033 Nov 15
+        NO Name in the Title 10% deducted
+    </title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Data table -->
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+
+    <!-- Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <!-- Map -->
+    <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- sweetalert2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.8.0/sweetalert2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.8.0/sweetalert2.all.min.js"></script>
+
+    <!-- moment js for date -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+    <!-- json-viewer -->
+    <script src="https://cdn.jsdelivr.net/npm/@@textea/json-viewer@3"></script>
+
+    <link href="https://juxinglong.github.io/static/MIS3033.css" rel="stylesheet" />
+</head>
+
+<body style="margin:20px;">
+
+
+
+    <div style="display:flex;flex-direction:row;">
+        <div class="input-group" style="width:300px;">
+            <label class="input-group-text">Path</label>
+            <input list="pathlist" id="path" name="" value="" class="form-control">
+            <datalist id="pathlist">
+                <option value="Home/GetEnrollments">
+                <option value="Home/GetStudents">
+                <option value="Home/GetCourses">
+            </datalist>
+
+        </div>
+        <div>
+            <button id="loadbtn" class="btn btn-primary" style="margin-left:5px;">Load Data</button>
+            <button id="tablebtn" class="btn btn-success" style="margin-left:5px;">Show Table</button>
+            <button id="chartbtn" class="btn btn-warning" style="margin-left:5px;">Show Chart</button>
+        </div>
+
+    </div>
+
+    <script>
+        "use strict";
+        var rootPath = '@Url.Content("~/")';
+    </script>
+
+    <script>
+        "use strict";
+        var grid = null
+        var c1 = null;
+        var c2 = null;
+        var c3 = null;
+        var g;
+        var jsondata = null;
+
+    </script>
+
+    <script>
+        {
+            let btn = document.querySelector( "#loadbtn" );
+            btn.addEventListener( "click", () =>
+            {
+                loadData();
+            } );
+
+            async function loadData ()
+            {
+                let url = rootPath + document.querySelector( "#path" ).value;
+                let fd = new FormData();
+
+                let r = await fetch( url, { method: "post", cache: "no-store", body: fd } );
+                let rj = await r.json();
+
+                jsondata = rj;
+
+                new JsonViewer( {
+                    value: jsondata,
+                } ).render( '#json' );
+
+            }
+        }
+    </script>
+    <div>
+        <span class="badge text-bg-primary" style="margin-top:10px;margin-bottom:0px;font-size:20px;" data-bs-toggle="collapse" data-bs-target="#jsondiv">JSON Data</span>
+        <div id="jsondiv" class="m-bd-callout m-bd-callout-primary collapse show collapse-vertical" style="margin-top:0;">
+            <div id="json"></div>
+        </div>
+    </div>
+
+    <script>
+        {
+            let btn = document.querySelector( "#tablebtn" );
+            btn.addEventListener( "click", () =>
+            {
+                ShowTable();
+            } );
+
+            async function ShowTable ()
+            {
+                if ( jsondata == null )
+                {
+                    Swal.fire( {
+                        icon: "error",
+                        title: "No data",
+                        text: "Load data first!",
+                    } );
+                    return;
+                }
+
+                if ( grid != null )
+                {
+                    grid.destroy();
+                }
+
+                let table = document.querySelector( "#table" );
+                table.innerHTML = "";
+
+                let params = {
+                    data: jsondata,
+                    sort: true,
+                    search: true,
+                    pagination: { limit: 5, },
+                };
+
+                grid = new gridjs.Grid( params );
+                grid.render( table );
+
+            }
+
+
+        }
+    </script>
+    <div>
+        <span class="badge text-bg-success" style="margin-top:10px;margin-bottom:0px;font-size:20px;" data-bs-toggle="collapse" data-bs-target="#tablediv">Table</span>
+        <div class="m-bd-callout m-bd-callout-success collapse show collapse-vertical" style="margin-top:0;" id="tablediv">
+            <div id="table"></div>
+        </div>
+    </div>
+
+
+    <script>
+        {
+            let btn = document.querySelector( "#chartbtn" );
+            btn.addEventListener( "click", () =>
+            {
+                ShowChart();
+            } );
+
+            async function ShowChart ()
+            {
+                if ( jsondata == null )
+                {
+                    Swal.fire( {
+                        icon: "error",
+                        title: "No data",
+                        text: "Load data first!",
+                    } );
+                    return;
+                }
+
+                let c = null;
+
+                c = c1;
+                if ( c != null )
+                {
+                    c.destroy();
+                }
+
+                c = c2;
+                if ( c != null )
+                {
+                    c.destroy();
+                }
+
+                c = c3;
+                if ( c != null )
+                {
+                    c.destroy();
+                }
+
+                let chart = null
+
+
+                chart = document.querySelector( "#c1" );
+                chart.innerHTML = "";
+
+                let params = null;
+
+                params = {
+                    type: "pie",
+                    data: {
+                        labels: jsondata.map( x => x.lg ),
+                        datasets: [
+                            {
+                                label: `Number of student in each letter grade`,
+                                data: jsondata.map( x => x.n ),
+                            },
+                        ],
+                    }
+                };
+                c1 = new Chart( chart, params );
+
+                //
+                chart = document.querySelector( "#c2" );
+                chart.innerHTML = "";
+                params.type = "bar";
+                c2 = new Chart( chart, params );
+
+                //
+                chart = document.querySelector( "#c3" );
+                chart.innerHTML = "";
+                params.type = "line";
+                c3 = new Chart( chart, params );
+
+
+            }
+        }
+    </script>
+    <div>
+        <span class="badge text-bg-warning" style="margin-top:10px;margin-bottom:0px;font-size:20px;" data-bs-toggle="collapse" data-bs-target="#chartdiv">Chart</span>
+        <div class="m-bd-callout m-bd-callout-warning collapse show collapse-vertical" style="margin-top:0;" id="chartdiv">
+            <div style="display:flex;flex-direction:row;">
+                <div>
+                    <div style="width:400px;">
+                        <canvas id="c1"></canvas>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="width:400px;">
+                        <canvas id="c2"></canvas>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="width:400px;">
+                        <canvas id="c3"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

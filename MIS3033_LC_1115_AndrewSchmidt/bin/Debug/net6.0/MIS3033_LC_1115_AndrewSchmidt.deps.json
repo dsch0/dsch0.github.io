@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "MIS3033_LC_1115_AndrewSchmidt/1.0.0": {
+        "runtime": {
+          "MIS3033_LC_1115_AndrewSchmidt.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MIS3033_LC_1115_AndrewSchmidt/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

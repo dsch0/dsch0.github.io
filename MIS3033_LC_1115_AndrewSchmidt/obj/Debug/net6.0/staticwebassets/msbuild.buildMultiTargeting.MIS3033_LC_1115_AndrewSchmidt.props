@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\MIS3033_LC_1115_AndrewSchmidt.props" />
+</Project>
