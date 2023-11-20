@@ -60,7 +60,7 @@
                 <a class="nav-link" href="~/stu/enrollment" target="_self">Enrollment</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="~/stu/chart" target="_self">Chart</a>
+                <a class="nav-link" href="~/stu/summary" target="_self">Summary</a> @* //chart to summary *@
             </li>
         </ul>
 
@@ -69,6 +69,83 @@
             <div class="alert alert-primary fw-bold text-uppercase" style="width:400px;display:flex;flex-direction:row;justify-content:center; align-items:center;">
                 Student Management
             </div>
+
+            <div>
+                <div style="width:400px;" class="m-bd-callout m-bd-callout-primary">
+                    <span> Student Information</span>
+                    <br />
+
+                    <div class="input-group"> 
+                        <label class="input-group-text">Student ID</label>
+                        <input type="text"/>
+                    </div>
+                </div>
+
+                <div id="mapdiv" style="width:600px; height:400px;">
+                    MAP
+                </div>
+                <script>
+                    {
+    let mapdiv = document.querySelector("#mapdiv");
+    mapdiv.innerHTML = "";
+                var map = L.map('mapdiv', { attributionControl: false, }).setView([35.212529, -97.505581], 12);
+
+                let tile = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                    maxZoom: 20,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                });
+                     tile.addTo(map);
+                    }
+                </script>
+                
+
+
+            </div>
+
+            <div id="table">
+                
+            </div>
+            <script>
+                "use strict";
+                {
+                    var grid=null;
+                    var g;
+                }
+                async function ShowTable() {//function body
+                    if (grid != null) {
+                        grid.destroy();
+                    }
+
+                    let tbl = document.querySelector("#table");
+                    tbl.innerHTML = "";
+           let r= await fetch(rootPath + "Stu/GetStus", { method: "post", cache: "no-store" });
+
+                    let rj = await r.json();
+
+                    let params = {
+                        data: rj,
+                        search:true,
+                        sort:true,
+                        width: 1200,
+                        pagination: {limit:5,},
+                        columns:  [{id:"id", name:"Stu ID"},
+                                  { id: "name", name: "Stu Name" },
+                                  {id:"dob", name:"DOB"},
+                                  { id: "favPlace", name: "Favorite Place" },
+                                  { id: "lon", name: "Longitude" },
+                                  { id: "lat", name: "Latitude" },
+                        ],
+                    };
+                    grid = new gridjs.Grid(params);
+                    grid.render(tbl);
+
+                }//end of show table
+                ShowTable(); //calls the function name
+
+            </script>
+
+
+
     </body>
 
 </html>
