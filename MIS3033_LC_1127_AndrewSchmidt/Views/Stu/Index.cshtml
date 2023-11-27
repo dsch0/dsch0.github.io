@@ -115,15 +115,66 @@
             </div>
 
                 </div>
+                <script>
+                    var idC = document.querySelector("#id");
+                    var nameC = document.querySelector("#name");
+                    var pnameC = document.querySelector("#pname");
+                    var latC = document.querySelector("#lat");
+                    var lonC = document.querySelector("#lon");
+                    var dobC = document.querySelector("#dob");
+
+                 </script>
 
                 <div id="mapdiv" style="width:600px; height:400px;border-radius:10px;margin-left:5px;">
                     MAP
                 </div>
                 <script>
                     {
-    let mapdiv = document.querySelector("#mapdiv");
-    mapdiv.innerHTML = "";
-                var map = L.map('mapdiv', { attributionControl: false, }).setView([35.212529, -97.505581], 12);
+                      var marker = null; //global variable , can use anywhere on the webpage
+                     let mapdiv = document.querySelector("#mapdiv");
+                     mapdiv.innerHTML = "";
+                   var map = L.map('mapdiv', { attributionControl: false, }).setView([35.212529, -97.505581], 12);
+
+                     map.on("click", (e) => {
+                         g = e;
+
+                         let lati = e.latlng.lat;
+                         let longi = e.latlng.lng;
+
+                         latC.value = lati;
+                         lonC.value = longi;
+
+
+
+                    if (marker != null) {
+                        map.removeLayer(marker);
+                        marker = null;
+                    }
+                    marker = L.marker([lati, longi]);
+
+                    map.setView([lati, longi],14);
+
+                    marker.bindPopup(`My favorite place <br/> Second line`);
+
+                    marker.addTo(map);
+                    marker.openPopup();//automatically open the text when you open the map
+
+                      });
+
+              
+
+
+                   if(marker!=null)
+                   {
+                       map.removeLayer(marker);
+                       marker = null;
+                   }
+                marker = L.marker([35.212529, -97.505581]);
+
+                marker.bindPopup(`My favorite place <br/> Second line`);
+              
+                marker.addTo(map);
+                marker.openPopup();//automatically open the text when you open the map
 
                 let tile = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
                     maxZoom: 20,
@@ -173,6 +224,46 @@
                     };
                     grid = new gridjs.Grid(params);
                     grid.render(tbl);
+
+            grid.on("rowClick", (...args) => 
+            {
+                idC.value = args[1]._cells[0].data;
+                nameC.value = args[1]._cells[1].data;
+                dobC.value = args[1]._cells[2].data;
+                pnameC.value = args[1]._cells[3].data;
+                latC.value = args[1]._cells[4].data;
+                lonC.value = args[1]._cells[5].data;
+
+                let d = args[1]._cells[2].data;
+                d = new Date(d);
+              
+                dobC.value = moment(d).format("yyyy-MM-DD");
+
+
+
+
+                let lati = args[1]._cells[4].data;
+                let longi = args[1]._cells[5].data;
+
+                latC.value = lati;
+                lonC.value = longi;
+
+
+
+                if (marker != null) {
+                    map.removeLayer(marker);
+                    marker = null;
+                }
+                marker = L.marker([lati, longi]);
+
+                map.setView([lati, longi], 14);
+
+                marker.bindPopup(`${pnameC.value}<br/>Stu Name:${nameC.value} `);
+
+                marker.addTo(map);
+                marker.openPopup();
+
+            });
 
                 }//end of show table
                 ShowTable(); //calls the function name
