@@ -74,12 +74,98 @@
         <div class="input-group">
             <label class="input-group-text"> Course</label>
 
-            <select class="form-select">
+            <select id="sc" class="form-select">
                    <option value="mis3013"> MIS3013 Intro to Programming</option>
                    <option value="mis3033"> MIS3033 C# Web App</option>
             </select>
         </div>
     </div>
+
+    <div id="table">
+     
+    </div>
+
+    <div style="width:500px;">
+        <canvas id="c1"> </canvas>
+        </div>
+
+    <script>
+        var sc = document.querySelector("#sc");
+        var grid = null;
+        var c1 = null;
+        sc.addEventListener("change", async () => {
+            //alert(sc.value);
+            let fd = new FormData();
+            fd.append("id",sc.value);
+            let r = await fetch(rootPath + "stu/getlg", {method:"post",cache:"no-store",body:fd})
+            let rj = await r.json();
+            // show table
+            if(grid!=null)
+            {
+                grid.destroy();
+            }
+            let table = document.querySelector("#table");
+            table.innerHTML = ""; //clean the table
+
+            let params;
+            params = {
+                data: rj,
+                width: 500,
+                columns: [{ id: "lg", name: "Letter Grade" }, { id: "n", name: "Number of Students"}],
+
+
+            };
+            grid = new gridjs.Grid(params);
+            grid.render(table);
+            // show chart
+            if (c1 !=null)
+            {
+                c1.destroy();
+            }
+            let canvas1 = document.querySelector("#c1");
+            canvas1.innerHTML = "";
+            params = {
+                type: "pie",
+                data: {
+                    labels: rj.map(x => x.lg),
+                    datasets: [
+                        {
+                            label: `Number`,
+                            data: rj.map(x => x.n),
+                        },
+                    ],
+                }
+            };
+           c1= new Chart(canvas1, params);
+
+            //end
+
+        });
+    </script>
+
+    <script>
+        async function loadsc() //do not want to manually add
+        {
+            let r = await fetch(rootPath + "stu/getsc");
+            let rj=await r.json();
+            sc.innerHTML = "";
+
+            for (let i = 0; i < rj.length; i++)
+            {
+                let opt = document.createElement("option");
+                opt.value = rj[i].id;
+                opt.text = rj[i].text;
+
+                sc.options.add(opt);
+            }
+            sc.selectedIndex = -1;
+           
+
+        }
+
+        loadsc();
+
+    </script>
 
 
 

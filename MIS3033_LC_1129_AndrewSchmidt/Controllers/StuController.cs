@@ -10,6 +10,17 @@ namespace MIS3033002_LC_1115_AndrewSchmidt.Controllers
 
         StuDB db = new StuDB(); //stuDB, complex, member field
 
+        public JsonResult getlg(string id)
+        {
+            var r = db.Enrollments.Where(x => x.CourseId == id).GroupBy(x=>x.LetterGrade).Select(x=>new {lg=x.Key,n=x.Count() }).OrderBy(x=>x.lg);
+            return Json(r);
+        }
+        public JsonResult getsc()
+        {
+            var r = db.Courses.Select(x=>new {id=x.Id,text=$"ID:{x.Id},Name:{x.Name}" } );
+            return Json(r);
+        }
+
         public IActionResult Profile()
         {
             return View();
