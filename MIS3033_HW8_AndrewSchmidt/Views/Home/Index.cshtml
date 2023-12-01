@@ -1,0 +1,289 @@
+﻿<html>
+
+    <head>
+        <title> Andrew Schmidt Homework 8 MIS 3033</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Data table -->
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+
+    <!-- Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <!-- Map -->
+    <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- sweetalert2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.8.0/sweetalert2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.8.0/sweetalert2.all.min.js"></script>
+
+    <!-- moment js for date -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+
+    <link href="https://juxinglong.github.io/static/MIS3033.css" rel="stylesheet" />
+
+    </head>
+
+        <body style="margin:20px;">
+
+            <div class="alert alert-primary text-uppercase fw-bold" style="width:600px;">
+                Patient Information System
+            </div>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="~/home/index" target="_self">Patients</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="~/home/chart" target="_self">Charts</a>
+        </li>
+    </ul>
+
+    <div class="m-bd-callout m-bd-callout-primary" style="width:500px;">
+        Patient Information
+
+
+        <div class="input-group">
+            <label class="input-group-text">ID</label>
+            <input id="id"type="text" class="form-control"/>
+        </div> 
+        
+        <div class="input-group">
+            <label class="input-group-text">Name</label>
+            <input id="name"type="text" class="form-control"/>
+        </div> 
+        
+        <div class="input-group">
+            <label class="input-group-text">Age</label>
+            <input id="age"type="text" class="form-control"/>
+        </div>
+
+        <div class="input-group">
+            <label class="input-group-text">Weight</label>
+            <input id="weight" type="text" class="form-control" />
+        </div>
+
+        <div class="input-group">
+            <label class="input-group-text">BMI</label>
+            <input id="BMI" type="text" class="form-control" />
+        </div>
+
+        <div>
+            <button id="addbtn" class="btn btn-sm btn-primary">Add</button>
+            <button id="editbtn" class="btn btn-sm btn-warning">Edit</button>
+            <button id="deletebtn" class="btn btn-sm btn-danger">Delete</button>
+
+            <span id="status" class="badge"></span>
+        </div>
+
+
+
+    </div>
+
+
+    <div id="table">
+
+    </div>
+
+
+
+    <script>
+        "use strict";
+        var rootPath = '@Url.Content("~/")';
+
+        var g;
+        var grid = null;
+        {
+             let btn;
+
+            //edit patient
+            btn = document.querySelector("#deletebtn");
+            btn.addEventListener("click", () => {
+                deletePatient();
+            });
+            async function deletePatient() {
+                let fd = new FormData();
+                fd.append('id', document.querySelector("#id").value);
+              
+
+                let status = document.querySelector("#status");
+                let r = await fetch(rootPath + "home/DeletePatient", { method: "post", cache: "no-store", body: fd });
+
+                if (r.ok == true) {
+                    let rj = await r.json();
+
+                    status.classList.remove("text-bg-danger");
+                    status.classList.add("text-bg-success");
+                    status.innerHTML = rj.message;
+
+                    ShowTable();//refreshes the table
+                    Swal.fire({
+                        icon: "success",
+                        title: "success",
+                        text: "Deleted patient successfully!",
+
+                    });
+
+
+                }
+                else {
+                    status.classList.remove("text-bg-success");
+                    status.classList.add("text-bg-danger");
+                    status.innerHTML = "Failed to edit student!!!";
+                    Swal.fire({
+                        icon: "error",
+                        title: "failed",
+                        text: "Delete patient failed!",
+
+                    });
+                }
+            }//end of the delete patient function
+
+            //edit patient
+            btn = document.querySelector("#editbtn");
+            btn.addEventListener("click", () => {
+                editPatient();
+            });
+            async function editPatient() {
+                let fd = new FormData();
+                fd.append('id', document.querySelector("#id").value);
+                fd.append('name', document.querySelector("#name").value);
+                fd.append('age', document.querySelector("#age").value);
+                fd.append('weight', document.querySelector("#weight").value);
+                fd.append('BMI', document.querySelector("#BMI").value);
+
+                let status = document.querySelector("#status");
+                let r = await fetch(rootPath + "home/EditPatient", { method: "post", cache: "no-store", body: fd });
+
+                if (r.ok == true) {
+                    let rj = await r.json();
+
+                    status.classList.remove("text-bg-danger");
+                    status.classList.add("text-bg-success");
+                    status.innerHTML = rj.message;
+
+                    ShowTable();//refreshes the table
+                    Swal.fire({
+                        icon: "success",
+                        title: "success",
+                        text: "Edit patient successfully!",
+
+                    });
+
+
+                }
+                else {
+                    status.classList.remove("text-bg-success");
+                    status.classList.add("text-bg-danger");
+                    status.innerHTML = "Failed to edit student!!!";
+                    Swal.fire({
+                        icon: "error",
+                        title: "failed",
+                        text: "Edit patient failed!",
+
+                    });
+                }
+            }//end of the edit patient function
+
+             //add patient
+             btn = document.querySelector("#addbtn");
+    btn.addEventListener("click", () => 
+    {
+        addPatient();
+    });
+    async function addPatient() 
+    {
+        let fd = new FormData();
+        fd.append('id', document.querySelector("#id").value);
+        fd.append('name', document.querySelector("#name").value);
+        fd.append('age', document.querySelector("#age").value);
+        fd.append('weight', document.querySelector("#weight").value);
+        fd.append('BMI', document.querySelector("#BMI").value);
+      
+        let status = document.querySelector("#status");
+       let r= await fetch(rootPath + "home/AddPatient", { method: "post", cache: "no-store", body: fd });
+
+       if (r.ok==true)
+       {
+           let rj = await r.json();
+
+                    status.classList.remove("text-bg-danger");
+                    status.classList.add("text-bg-success");
+                    status.innerHTML = rj.message;
+
+           ShowTable();//refreshes the table
+                    Swal.fire({
+                        icon: "success",
+                        title: "success",
+                        text: "add patient successfully!",
+
+                    });
+
+
+       }
+       else
+       {               status.classList.remove("text-bg-success");
+                            status.classList.add("text-bg-danger");
+                            status.innerHTML = "Failed to add student!!!";
+           Swal.fire({
+                   icon:"error",
+                   title:"failed",
+                   text:"add patient failed!",
+
+              });
+       }
+    }//end of the add patient function
+    ////////////////////////////////////////
+
+
+    async function ShowTable()
+    {
+        if (grid!=null)
+        {
+            grid.destroy();
+        }
+        let table = document.querySelector("#table");
+        table.innerHTML = "";
+
+        let r = await fetch(rootPath + "home/GetPatients", { method: "post", cache: "no-store"});
+        let rj = await r.json();
+
+        let params =
+        {
+            data: rj,
+            search: true,
+            sort: true,
+            pagination: { limit: 5 },
+            width: 1000,
+            columns: [{ id: "id", name: "ID", },
+            { id: "name", name: "Name", },
+            { id: "age", name: "Age", },
+            { id: "weight", name: "Weight(lbs)", },
+            { id: "bmi", name: "BMI", },
+            { id: "bmiLevel", name: "BMI Level", },]
+
+        };
+        grid = new gridjs.Grid(params);
+        grid.render(table);
+
+
+    }
+    ShowTable();
+        }
+
+    </script>
+
+        </body>
+</html>

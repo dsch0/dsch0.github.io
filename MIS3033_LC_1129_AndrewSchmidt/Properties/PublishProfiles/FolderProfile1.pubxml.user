@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\drew_\Desktop\MIS3033\htmlcss\dsch0.github.io\MIS3033_LC_1120_AndrewSchmidt\bin\Release\net6.0\publish\</_PublishTargetUrl>
-    <History>True|2023-11-20T17:40:28.8579696Z;</History>
+    <_PublishTargetUrl>C:\Users\drew_\Desktop\MIS3033\htmlcss\dsch0.github.io\MIS3033_LC_1129_AndrewSchmidt\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-11-29T17:42:48.7617160Z;True|2023-11-20T11:40:28.8579696-06:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>
