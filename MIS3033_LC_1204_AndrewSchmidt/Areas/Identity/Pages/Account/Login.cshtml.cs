@@ -20,13 +20,15 @@ namespace MIS3033002_LC_1115_AndrewSchmidt.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        private readonly UserManager<AuthenUser> _userManager;// dependency injection
         private readonly SignInManager<AuthenUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<AuthenUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<AuthenUser> signInManager, ILogger<LoginModel> logger, UserManager<AuthenUser> _userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = _userManager;
         }
 
         /// <summary>
@@ -115,6 +117,15 @@ namespace MIS3033002_LC_1115_AndrewSchmidt.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var authenUser = await _userManager.FindByNameAsync(Input.Email);
+                    if (await _userManager.IsInRoleAsync(authenUser, "S"))//role is student
+                    {
+                        returnUrl = Url.Content("~/Stu/Index");
+                    }
+                    else if (await _userManager.IsInRoleAsync(authenUser, "T"))// role is teacher
+                    {
+                        returnUrl = Url.Content("~/Stu/Chart");
+                    }  
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MIS3033002_LC_1115_AndrewSchmidt.Data;
 
 namespace MIS3033002_LC_1115_AndrewSchmidt.Controllers
@@ -34,6 +35,7 @@ namespace MIS3033002_LC_1115_AndrewSchmidt.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "Teacher")]
         public IActionResult Chart()
         {
             return View();
@@ -47,7 +49,8 @@ namespace MIS3033002_LC_1115_AndrewSchmidt.Controllers
             var r = db.Students.Select(x=>new {Id=x.Id,name=x.Name,favPlace=x.favPlace,DOB=x.DOB.ToString("MM/dd/yyyy"),lat=x.lat,lon=x.lon });
             return Json(db.Students);
         }
-        
+
+        [Authorize(Roles ="Student,Teacher")]
         public IActionResult Index()
         {
             return View();

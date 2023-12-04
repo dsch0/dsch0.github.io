@@ -1,4 +1,5 @@
 ﻿using a;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MIS3033002_LC_1115_AndrewSchmidt.Data;
@@ -40,6 +41,7 @@ namespace MIS3033002_LC_1115_AndrewSchmidt.Controllers
         {
             return Json(db.Enrollments);
         }
+        [Authorize]
         
         public IActionResult Index()
         {

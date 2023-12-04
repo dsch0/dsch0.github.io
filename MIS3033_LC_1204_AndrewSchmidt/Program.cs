@@ -4,7 +4,19 @@ using Microsoft.EntityFrameworkCore;
 using MIS3033002_LC_1115_AndrewSchmidt.Areas.Identity.Data;
 using MIS3033002_LC_1115_AndrewSchmidt.Data;
 
+//authentication and authorization
+//authen: user name, pass
+//author: 
+
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = "MIS3033_schm0096_1204";
+});
+
 var connectionString = builder.Configuration.GetConnectionString("AuthenDbConnectConnection") ?? throw new InvalidOperationException("Connection string 'AuthenDbConnectConnection' not found.");
 
 builder.Services.AddDbContext<AuthenDbConnect>(options =>
